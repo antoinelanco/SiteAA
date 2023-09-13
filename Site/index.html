@@ -19,7 +19,7 @@
 
           (async () => {
             const response_raw = await fetch(file.download_url);
-            const data_raw = await response.json();
+            const data_raw = await response_raw.json();
 
             // let htmlString = '<br><h1>';
             // htmlString += data_raw.title;
