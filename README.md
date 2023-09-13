@@ -2,4 +2,4 @@
 
 Bonjour
 
-[Access control]: Site/acticles/access_control.md
+[Access control]: /Site/acticles/access_control.md
