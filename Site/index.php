@@ -7,5 +7,11 @@
   </head>
   <body>
     <h1>Sup!</h1>
+
+    <?php
+      $dir    = '/articles';
+      $files1 = scandir($dir);
+      print_r($files1);
+    ?>
   </body>
 </html>
