@@ -2,6 +2,6 @@
 
 Bonjour
 
-[Site](#anchor-name)
+[Site](#/Site)
 
-<a name="anchor-name"></a>
+<a name="/Site"></a>
