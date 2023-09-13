@@ -30,11 +30,11 @@
 
               htmlString += "Tags : ";
               for (let t of data_raw.tags){
-                htmlString += t
-                htmlString += " "
+                htmlString += t;
+                htmlString += " ";
               }
-              htmlString += "<br><br>"
-              htmlString += data_raw.text
+              htmlString += "<br><br>";
+              htmlString += data_raw.text;
 
 
             document.getElementsByTagName('p')[0].innerHTML += htmlString;
