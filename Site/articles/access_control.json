@@ -1,5 +1,5 @@
 {
-  title : Test,
-  tags : [access_control,test],
-  text : Bla
+  "title" : "Test",
+  "tags" : ["access_control","test"],
+  "text" : "Bla"
 }
