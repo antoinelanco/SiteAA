@@ -14,14 +14,27 @@
       (async () => {
         const response = await fetch('https://api.github.com/repos/antoinelanco/SiteAA/contents/Site/articles');
         const data = await response.json();
-        let htmlString = '<ul>';
 
         for (let file of data) {
-          htmlString += `<li><a href="${file.path}">${file.name}</a></li>`;
+
+          (async () => {
+            const response_raw = await fetch(${file.download_url});
+            const data_raw = await response.json();
+
+            let htmlString = '<br><h1>';
+            htmlString += ${data_raw.title};
+            htmlString += '</h1>'
+
+              htmlString += `<li><a href="${file.path}">${file.name}</a></li>`;
+
+            htmlString += '</ul>';
+
+
+            document.getElementsByTagName('p')[0].innerHTML += htmlString;
+
+          })
         }
 
-        htmlString += '</ul>';
-        document.getElementsByTagName('p')[0].innerHTML = htmlString;
       })()
     </script>
 
