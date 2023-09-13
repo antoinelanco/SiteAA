@@ -25,7 +25,7 @@
             const data_raw = await response_raw.json();
 
             let htmlString = '<br><h1>';
-            htmlString += `<li><a href="/articles/${data_raw.url}">${data_raw.title}</a></li>`;
+            htmlString += `<li><a href="articles/${data_raw.url}">${data_raw.title}</a></li>`;
             htmlString += '</h1><br>-------------------<br>';
 
               htmlString += "Tags : ";
