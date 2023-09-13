@@ -21,16 +21,16 @@
             const response_raw = await fetch(file.download_url);
             const data_raw = await response.json();
 
-            let htmlString = '<br><h1>';
-            htmlString += data_raw.title;
-            htmlString += '</h1>'
+            // let htmlString = '<br><h1>';
+            // htmlString += data_raw.title;
+            // htmlString += '</h1>'
+            //
+            //   htmlString += `<li><a href="${file.path}">${file.name}</a></li>`;
+            //
+            // htmlString += '</ul>';
 
-              htmlString += `<li><a href="${file.path}">${file.name}</a></li>`;
 
-            htmlString += '</ul>';
-
-
-            document.getElementsByTagName('p')[0].innerHTML += htmlString;
+            document.getElementsByTagName('p')[0].innerHTML += data_raw;
 
           })()
         }
