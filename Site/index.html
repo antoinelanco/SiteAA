@@ -8,7 +8,7 @@
 </head>
 
 <body>
-  <p class="all-tags"></p>
+  <div class="all-tags"></div>
   <div class="container">
     <script>
       (async () => {
@@ -17,17 +17,11 @@
         var allTags = new Set();
         var tagString = '';
 
-
-        for (let file of data) {
-
-          (async () => {
+        async function  create(file)  {
             const response_raw = await fetch(file.download_url);
             const data_raw = await response_raw.json();
-
             let htmlString = '<div class="card"> <div class="card-body"';
-
             htmlString += `<h2><a href="articles/${data_raw.url}">${data_raw.title}</a></h2>`;
-
             htmlString += " <br><p>";
             htmlString += data_raw.text;
             htmlString += "</p>";
@@ -39,41 +33,23 @@
               allTags.add(t);
               temp += '</a>';
               htmlString += temp;
-              // htmlString += '<span class="tag">';
-              //htmlString += t;
-              // htmlString += '</span>';
             }
             htmlString += "</p>";
 
             htmlString += "</div>";
-            /* let arr = Array.from(allTags);
-             for(tt in arr){
-               let temp = '<a href="#" class="tag">';
-               temp += arr[tt];
-               temp += '</a>';
-               tagString += temp;
-             }*/
-
-
-
             document.getElementsByClassName('container')[0].innerHTML += htmlString;
-            //document.getElementsByClassName('all-tags')[0].innerHTML += tagString;
-
-
-          })()
         };
-        let arr = Array.from(allTags);
-        console.log(allTags);
 
-        console.log(arr);
-        for (tt in arr) {
+        for (let file of data) {
+          await create (file);
+          
+        };
+        for (tt of allTags) {
           let temp = '<a href="#" class="tag">';
-          temp += arr[tt];
+          temp += tt;
           temp += '</a>';
-          temp += "<p> fucj </p>";
           tagString += temp;
         };
-        console.log(tagString);
 
         document.getElementsByClassName('all-tags')[0].innerHTML += tagString;
 
