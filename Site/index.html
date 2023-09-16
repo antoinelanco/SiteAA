@@ -17,29 +17,29 @@
         var allTags = new Set();
         var tagString = '';
 
-        async function  create(file)  {
-            const response_raw = await fetch(file.download_url);
-            const data_raw = await response_raw.json();
-            let htmlString = '<div class="card"> <div class="card-body"';
-            htmlString += `<h2><a href="articles/${data_raw.url}">${data_raw.title}</a></h2>`;
-            htmlString += " <br><p>";
-            htmlString += data_raw.text;
-            htmlString += "</p>";
-            htmlString += '<span> Tags </span>';
-            htmlString += '<p class="tags">';
-            for (let t of data_raw.tags) {
-            let temp = `<a href="#" class="tag ${t}"> ${t} </a>`;
-              allTags.add(t);
-              htmlString += temp;
-            }
-            htmlString += "</p>";
+        async function create(file) {
+          const response_raw = await fetch(file.download_url);
+          const data_raw = await response_raw.json();
+          let htmlString = '<div class="card"> <div class="card-body"';
+          htmlString += `<h2><a href="articles/${data_raw.url}">${data_raw.title}</a></h2>`;
+          htmlString += " <br><p>";
+          htmlString += data_raw.text;
+          htmlString += "</p>";
+          htmlString += '<span> Tags </span>';
+          htmlString += '<p class="tags">';
+          for (let t of data_raw.tags) {
+            let temp = `<a href="#" class="tag ${t}">${t}</a>`;
+            allTags.add(t);
+            htmlString += temp;
+          }
+          htmlString += "</p>";
 
-            htmlString += "</div>";
-            document.getElementsByClassName('container')[0].innerHTML += htmlString;
+          htmlString += "</div>";
+          document.getElementsByClassName('container')[0].innerHTML += htmlString;
         };
 
         for (let file of data) {
-          await create (file);
+          await create(file);
 
         };
         for (tt of allTags) {
@@ -52,75 +52,67 @@
         document.getElementsByClassName('all-tags')[0].innerHTML += tagString;
 
         // Add click event listeners to tag elements (both in the cards and in the collection of all tags)
-const tagElements = document.querySelectorAll('.tag');
+        const tagElements = document.querySelectorAll('.tag');
 
-tagElements.forEach(tagElement => {
-  tagElement.addEventListener('click', () => {
-    toggleTagSelection(tagElement); // Toggle the 'selected' class
-
-    // Filter the cards based on selected tags
-    filterCards();
-  });
-});
-
-
-// Function to toggle the 'selected' class for a tag
-function toggleTagSelection(tagElement) {
-
-  // Toggle the 'selected' class for the corresponding tag in the main tag list
-  const tagText = tagElement.innerText;
-  tagElements.forEach(mainTagElement => {
-    console.log("la : ",mainTagElement.innerText);
-    if (mainTagElement.innerText.toUpperCase() === tagText.toUpperCase()) {
-      mainTagElement.classList.toggle('selected');
-    }
-  });
-}
-
-// Function to filter cards
-function filterCards() {
-  const selectedTags = new Set();
-
-  tagElements.forEach(tagElement => {
-    if (tagElement.classList.contains('selected')) {
-      selectedTags.add(tagElement.innerText.toUpperCase());
-    }
-  });
+        tagElements.forEach(tagElement => {
+          tagElement.addEventListener('click', () => {
+            toggleTagSelection(tagElement); // Toggle the 'selected' class
+            // Filter the cards based on selected tags
+            filterCards();
+          });
+        });
 
 
-  const cardElements = document.querySelectorAll('.card');
+        // Function to toggle the 'selected' class for a tag
 
-  console.log(selectedTags.size);
-  if (selectedTags.size === 0) {
-    cardElements.forEach(cardElement => {
-      cardElement.style.display = 'block';
-    });
-    return 0;
-  }
+        function toggleTagSelection(tagElement) {
 
+          // Toggle the 'selected' class for the corresponding tag in the main tag list
+          const tagText = tagElement.innerHTML;
+          tagElements.forEach(mainTagElement => {
+            if (mainTagElement.innerHTML === tagText) {
+              mainTagElement.classList.toggle('selected');
+            }
+          });
+        }
 
-  cardElements.forEach(cardElement => {
-    const cardTags = cardElement.querySelectorAll('.tag');
-    let shouldShow = false
-    cardTags.forEach(cardTag => {
-      if (selectedTags.has(cardTag.innerText.toUpperCase())) {
-        shouldShow = true;
-      }
+        // Function to filter cards
+        function filterCards() {
+          const selectedTags = new Set();
+          tagElements.forEach(tagElement => {
+            if (tagElement.classList.contains('selected')) {
+              selectedTags.add(tagElement.innerHTML);
+            }
+          });
+          const cardElements = document.querySelectorAll('.card');
 
+          if (selectedTags.size === 0) {
+            cardElements.forEach(cardElement => {
+              cardElement.style.display = 'block';
+            });
+            return 0;
+          }
 
-    });
+          cardElements.forEach(cardElement => {
+            const cardTags = cardElement.querySelectorAll('.tag');
+            let shouldShow = false
+            cardTags.forEach(cardTag => {
+              if (selectedTags.has(cardTag.innerHTML)) {
+                shouldShow = true;
+              }
+            });
 
-    if (shouldShow) {
-      cardElement.style.display = 'block';
-    }else{
-      cardElement.style.display = 'none';
-    }
+            if (shouldShow) {
+              cardElement.style.display = 'block';
+            } else {
+              cardElement.style.display = 'none';
+            }
 
-  });
-}
+          });
+        }
 
-// Initial filtering to show all cards
-filterCards();
+        // Initial filtering to show all cards
+        filterCards();
 
 
       })()
