@@ -40,7 +40,7 @@
 
         for (let file of data) {
           await create (file);
-          
+
         };
         for (tt of allTags) {
           let temp = `<a href="#" class="tag ${tt}">`;
@@ -53,6 +53,7 @@
 
         // Add click event listeners to tag elements (both in the cards and in the collection of all tags)
 const tagElements = document.querySelectorAll('.tag');
+console.log(tagElements);
 
 tagElements.forEach(tagElement => {
   tagElement.addEventListener('click', () => {
@@ -63,17 +64,6 @@ tagElements.forEach(tagElement => {
   });
 });
 
-// Add click event listeners to tags in the "all-tags" section
-const allTagElements = document.querySelectorAll('.all-tags .tag');
-
-allTagElements.forEach(allTagElement => {
-  allTagElement.addEventListener('click', () => {
-    toggleTagSelection(allTagElement); // Toggle the 'selected' class for the clicked tag
-
-    // Filter the cards based on selected tags
-    filterCards();
-  });
-});
 
 // Function to toggle the 'selected' class for a tag
 function toggleTagSelection(tagElement) {
