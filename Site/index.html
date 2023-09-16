@@ -20,7 +20,7 @@
   <script>
     // Function to search for tags
     function searchTags() {
-      const searchInput = document.getElementById('tag-search-input'); // Replace with your input element's ID
+      const searchInput = document.getElementById('tag-search-input'); 
       const tagElements = document.querySelectorAll('.all-tags .tag');
 
       const searchText = searchInput.value.trim().toUpperCase();
@@ -35,19 +35,16 @@
       });
     }
     function clearSearch() {
-      const searchInput = document.getElementById('tag-search-input'); // Replace with your input element's ID
+      const searchInput = document.getElementById('tag-search-input'); 
       const tagElements = document.querySelectorAll('.all-tags .tag');
 
       // Clear the search input field
       searchInput.value = '';
 
-      // Reset the display style for all tags to 'block'
       tagElements.forEach(tagElement => {
         tagElement.style.display = 'inline-block';
       });
 
-      // Call the filterCards function to reapply tag filtering based on selected tags (if any)
-      filterCards();
     }
 
 
