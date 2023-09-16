@@ -53,7 +53,6 @@
 
         // Add click event listeners to tag elements (both in the cards and in the collection of all tags)
 const tagElements = document.querySelectorAll('.tag');
-console.log(tagElements);
 
 tagElements.forEach(tagElement => {
   tagElement.addEventListener('click', () => {
@@ -67,7 +66,6 @@ tagElements.forEach(tagElement => {
 
 // Function to toggle the 'selected' class for a tag
 function toggleTagSelection(tagElement) {
-  tagElement.classList.toggle('selected');
 
   // Toggle the 'selected' class for the corresponding tag in the main tag list
   const tagText = tagElement.innerText;
