@@ -28,10 +28,8 @@
             htmlString += '<span> Tags </span>';
             htmlString += '<p class="tags">';
             for (let t of data_raw.tags) {
-              let temp = '<a href="#" class="tag">';
-              temp += t;
+            let temp = `<a href="#" class="tag ${t}"> ${t} </a>`;
               allTags.add(t);
-              temp += '</a>';
               htmlString += temp;
             }
             htmlString += "</p>";
@@ -45,13 +43,84 @@
           
         };
         for (tt of allTags) {
-          let temp = '<a href="#" class="tag">';
+          let temp = `<a href="#" class="tag ${tt}">`;
           temp += tt;
           temp += '</a>';
           tagString += temp;
         };
 
         document.getElementsByClassName('all-tags')[0].innerHTML += tagString;
+
+        // Add click event listeners to tag elements (both in the cards and in the collection of all tags)
+const tagElements = document.querySelectorAll('.tag');
+
+tagElements.forEach(tagElement => {
+  tagElement.addEventListener('click', () => {
+    toggleTagSelection(tagElement); // Toggle the 'selected' class
+
+    // Filter the cards based on selected tags
+    filterCards();
+  });
+});
+
+// Add click event listeners to tags in the "all-tags" section
+const allTagElements = document.querySelectorAll('.all-tags .tag');
+
+allTagElements.forEach(allTagElement => {
+  allTagElement.addEventListener('click', () => {
+    toggleTagSelection(allTagElement); // Toggle the 'selected' class for the clicked tag
+
+    // Filter the cards based on selected tags
+    filterCards();
+  });
+});
+
+// Function to toggle the 'selected' class for a tag
+function toggleTagSelection(tagElement) {
+  tagElement.classList.toggle('selected');
+
+  // Toggle the 'selected' class for the corresponding tag in the main tag list
+  const tagText = tagElement.innerText;
+  tagElements.forEach(mainTagElement => {
+    if (mainTagElement.innerText === tagText) {
+      mainTagElement.classList.toggle('selected');
+    }
+  });
+}
+
+// Function to filter cards
+function filterCards() {
+  const selectedTags = new Set();
+
+  tagElements.forEach(tagElement => {
+    if (tagElement.classList.contains('selected')) {
+      selectedTags.add(tagElement.innerText);
+    }
+  });
+
+  const cardElements = document.querySelectorAll('.card');
+
+  cardElements.forEach(cardElement => {
+    const cardTags = cardElement.querySelectorAll('.tag');
+    let shouldShow = false;
+
+    cardTags.forEach(cardTag => {
+      if (selectedTags.has(cardTag.innerText) || selectedTags.size === 0) {
+        shouldShow = true;
+      }
+    });
+
+    if (shouldShow) {
+      cardElement.style.display = 'block';
+    } else {
+      cardElement.style.display = 'none';
+    }
+  });
+}
+
+// Initial filtering to show all cards
+filterCards();
+
 
       })()
     </script>
