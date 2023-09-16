@@ -70,7 +70,8 @@ function toggleTagSelection(tagElement) {
   // Toggle the 'selected' class for the corresponding tag in the main tag list
   const tagText = tagElement.innerText;
   tagElements.forEach(mainTagElement => {
-    if (mainTagElement.innerText === tagText) {
+    console.log("la : ",mainTagElement.innerText);
+    if (mainTagElement.innerText.toUpperCase() === tagText.toUpperCase()) {
       mainTagElement.classList.toggle('selected');
     }
   });
@@ -82,27 +83,39 @@ function filterCards() {
 
   tagElements.forEach(tagElement => {
     if (tagElement.classList.contains('selected')) {
-      selectedTags.add(tagElement.innerText);
+      selectedTags.add(tagElement.innerText.toUpperCase());
     }
   });
 
+
   const cardElements = document.querySelectorAll('.card');
+
+  console.log(selectedTags.size);
+  if (selectedTags.size === 0) {
+    cardElements.forEach(cardElement => {
+      cardElement.style.display = 'block';
+    });
+    return 0;
+  }
+
 
   cardElements.forEach(cardElement => {
     const cardTags = cardElement.querySelectorAll('.tag');
-    let shouldShow = false;
-
+    let shouldShow = false
     cardTags.forEach(cardTag => {
-      if (selectedTags.has(cardTag.innerText) || selectedTags.size === 0) {
+      if (selectedTags.has(cardTag.innerText.toUpperCase())) {
         shouldShow = true;
       }
+
+
     });
 
     if (shouldShow) {
       cardElement.style.display = 'block';
-    } else {
+    }else{
       cardElement.style.display = 'none';
     }
+
   });
 }
 
