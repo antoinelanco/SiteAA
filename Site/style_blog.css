@@ -31,7 +31,7 @@ span {
 
   .tags {
     margin: 2;
-    display: flex;
+    /*display: flex;*/
     justify-content: center;
     align-items: center;
   }
