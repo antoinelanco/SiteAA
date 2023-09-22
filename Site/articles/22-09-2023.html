@@ -22,20 +22,23 @@
       Dans le cadre d'une enchère sur la blockchain avec comme contrainte que les
       enchères soient cachées, il est possible d'utiliser une preuve zéro
       connaissance (ZK) :
-
+      </p>
+      <p>
       Le contrat qui gère les enchères crée un hash de la preuve que le prix proposé
       est bien supérieur au prix de l'enchère.
-
+      </p>
+      <p>
       Donc, si le prix à trouver est de 1200 €, le contrat va créer la preuve :
       H(1200 ≥ 1500) qui est égale a H(1200) ≥ H(1500).
-
+      </p>
+      <p>
       Les participants vont donc envoyer le résultat de la preuve H(X) avec X
       leur proposition.
-
+      </p>
+      <p>
       Et le contrat va vérifier si H(1200) ≥ H(X) = H(1200 ≥ 1500) est vrai, et si
       c'est le cas, le contrat sait que le participant a bien proposé un prix
       supérieur à 1200 sans que les autres participants le sachent.
-
       </p>
 
   </body>
